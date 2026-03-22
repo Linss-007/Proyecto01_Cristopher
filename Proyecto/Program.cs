@@ -1,11 +1,16 @@
 ﻿int opcion;
+int tipo;
+double duracion;
+int clasificación;
+int hora;
+int nivelProduc;
 do
 {
     menu();
     switch (opcion)
     {
         case 1:
-
+            evaluarContenido();
         break;
 
         case 2:
@@ -21,7 +26,7 @@ do
         break;
 
         case 5:
-            Console.WriteLine("Saliendo...");
+            Console.WriteLine("Saliendo. a continuación resumen de los datos:");
         break;
 
         default:
@@ -42,5 +47,34 @@ void menu()
     Console.WriteLine("4. Reiniciar estadísticas");
     Console.WriteLine("5. Salir");
     Console.WriteLine("Elija una opción para continuar");
-    opcion = int.Parse(Console.ReadLine());
+    if(int.TryParse(Console.ReadLine(), out opcion))
+    {
+
+    }
+    else
+    {
+        Console.WriteLine("Ingrese un numero correspondiente a las opciones");
+    }
+}
+void evaluarContenido()
+{
+    tipoContenido();
+    
+}
+int tipoContenido()
+{
+    Console.WriteLine("Ingrese el tipo de contenido");
+    Console.WriteLine("1. Pelicula");
+    Console.WriteLine("2. Serie");
+    Console.WriteLine("3. Documental");
+    Console.WriteLine("4. Evento en vivo");
+    if(int.TryParse(Console.ReadLine(), out tipo))
+    {
+        return tipo;
+    }
+    else
+    {
+        Console.WriteLine("El dato ingresado no es valido");
+        return tipo = 0;
+    }
 }
