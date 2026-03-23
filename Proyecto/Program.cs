@@ -1,5 +1,5 @@
 ﻿int opcion;
-int tipo;
+int tipo = 0;
 double duracion;
 int clasificación;
 int hora;
@@ -59,22 +59,90 @@ void menu()
 void evaluarContenido()
 {
     tipoContenido();
-    
 }
 int tipoContenido()
 {
+    bool datoCorrecto = false;
     Console.WriteLine("Ingrese el tipo de contenido");
     Console.WriteLine("1. Pelicula");
     Console.WriteLine("2. Serie");
     Console.WriteLine("3. Documental");
     Console.WriteLine("4. Evento en vivo");
-    if(int.TryParse(Console.ReadLine(), out tipo))
+    while(!datoCorrecto)
     {
-        return tipo;
+        datoCorrecto = int.TryParse(Console.ReadLine(), out tipo);
+        if(!datoCorrecto)
+        {
+            Console.WriteLine("Dato no válido, vuelva a ingresarlo");
+        }
     }
-    else
+    return tipo;
+}
+double duracionContenido()
+{
+    bool datoCorrecto = false;
+    Console.WriteLine("Ingrese la duración del contenido en minutos (ejemplo: 120)");
+    while (!datoCorrecto)
     {
-        Console.WriteLine("El dato ingresado no es valido");
-        return tipo = 0;
+        datoCorrecto = double.TryParse(Console.ReadLine(), out duracion);
+        if (!datoCorrecto)
+        {
+            Console.WriteLine("Dato incorrecto vuelva a ingresarlo");
+        }
     }
+    return duracion;
+}
+int clasContenido()
+{
+    bool datoCorrecto = false;
+    Console.WriteLine("Ingrese la clasificación del contenido");
+    Console.WriteLine("1. Todo público");
+    Console.WriteLine("2. +13");
+    Console.WriteLine("3. +18");
+    while(!datoCorrecto)
+    {
+        datoCorrecto = int.TryParse(Console.ReadLine(), out clasificación);
+        if(!datoCorrecto)
+        {
+            Console.WriteLine("Clasificación no valida, intente de nuevo");
+        }
+    }
+    return clasificación;
+}
+int horaContenido()
+{
+    bool datoCorrecto = false;
+    Console.WriteLine("Ingrese la hora programada (formato 24 horas)");
+    while(!datoCorrecto)
+    {
+        datoCorrecto = int.TryParse(Console.ReadLine(), out hora);
+        if(!datoCorrecto)
+        {
+            Console.WriteLine("Hora no válida, intente de nuevo");
+        }
+    }
+    return hora;
+}
+int producContenido()
+{
+    bool datoCorrecto = false;
+    Console.WriteLine("Ingrese el nivel de producción");
+    Console.WriteLine("1. Alto");
+    Console.WriteLine("2. Medio");
+    Console.WriteLine("3. Bajo");
+    while(!datoCorrecto)
+    {
+        datoCorrecto = int.TryParse(Console.ReadLine(), out nivelProduc);
+        if(!datoCorrecto)
+        {
+            Console.WriteLine("Nivel no válido, intente de nuevo");
+        }
+    }
+    return nivelProduc;
+}
+void limpiar()
+{
+    Console.WriteLine("Pulse cualquier tecla para continuar");
+    Console.ReadKey();
+    Console.Clear();
 }
