@@ -5,10 +5,13 @@ int clasificación = 0;
 int hora = -1;
 int nivelProduc = 0;
 int errores = 0;
-string impacto;
+string impacto = "";
 int cantImpAlto = 0;
 int cantImpMedio = 0;
 int cantImpBajo = 0;
+int cantPublicado = 0;
+int cantRechazado = 0;
+int cantRevision = 0;
 do
 {
     menu();
@@ -16,6 +19,16 @@ do
     {
         case 1:
             evaluarContenido();
+            if(errores > 2)
+            {
+                Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
+            }
+            else
+            {
+                evaluarImpacto();
+                decisionFinal();
+            }
+            limpiar();
         break;
 
         case 2:
@@ -73,12 +86,12 @@ void evaluarContenido()
             producContenido();
             if(clasificación == 2 && (hora < 6 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +13");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +13");
                 errores++;
             }
             else if(clasificación == 3 && (hora < 5 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +18");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +18");
                 errores++;
             }
 
@@ -93,7 +106,6 @@ void evaluarContenido()
                 Console.WriteLine("El nivel de producción bajo no permite la clasificación +18");
                 errores++;
             }
-            limpiar();
         break;
 
         case 2:
@@ -103,12 +115,12 @@ void evaluarContenido()
             producContenido();
             if (clasificación == 2 && (hora < 6 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +13");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +13");
                 errores++;
             }
             else if (clasificación == 3 && (hora < 5 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +18");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +18");
                 errores++;
             }
 
@@ -123,7 +135,6 @@ void evaluarContenido()
                 Console.WriteLine("El nivel de producción bajo no permite la clasificación +18");
                 errores++;
             }
-            limpiar();
         break;
 
         case 3:
@@ -133,12 +144,12 @@ void evaluarContenido()
             producContenido();
             if (clasificación == 2 && (hora < 6 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +13");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +13");
                 errores++;
             }
             else if (clasificación == 3 && (hora < 5 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +18");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +18");
                 errores++;
             }
 
@@ -153,7 +164,6 @@ void evaluarContenido()
                 Console.WriteLine("El nivel de producción bajo no permite la clasificación +18");
                 errores++;
             }
-            limpiar();
         break;
 
         case 4:
@@ -163,12 +173,12 @@ void evaluarContenido()
             producContenido();
             if (clasificación == 2 && (hora < 6 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +13");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +13");
                 errores++;
             }
             else if (clasificación == 3 && (hora < 5 || hora > 22))
             {
-                Console.WriteLine("Hay un error la hora ingresada no se puede aplicar a la clasificación +18");
+                Console.WriteLine("Hay un error, la hora ingresada no se puede aplicar a la clasificación +18");
                 errores++;
             }
 
@@ -183,7 +193,6 @@ void evaluarContenido()
                 Console.WriteLine("El nivel de producción bajo no permite la clasificación +18");
                 errores++;
             }
-            limpiar();
         break;
 
         default:
@@ -210,6 +219,29 @@ void evaluarImpacto()
         impacto = "Bajo";
         Console.WriteLine($"Nivel de impacto: {impacto}");
         cantImpBajo++;
+    }
+}
+void decisionFinal()
+{
+    if (errores > 1)
+    {
+        Console.WriteLine("El contenido a sido rechazado debido a el incumplimiento de muchas normas");
+        cantRechazado++;
+    }
+    else if (errores == 0 && (impacto == "Medio" || impacto == "Bajo"))
+    {
+        Console.WriteLine("El contenido se puede publicar sin problema :)");
+        cantPublicado++;
+    }
+    else if((errores < 1 && errores > 0) && (impacto == "Medio" || impacto == "Bajo"))
+    {
+        Console.WriteLine("El contenido se puede publicar pero debe ser ajustado corrigiendo los errores mencionados");
+        cantPublicado++;
+    }
+    else if((errores < 1 && errores > 0) || impacto == "Alto")
+    {
+        Console.WriteLine("El contenido debe ser enviado a revisar debido a su impacto");
+        cantRevision++;
     }
 }
 int tipoContenido()
