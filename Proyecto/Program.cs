@@ -152,6 +152,82 @@ void reset()
     totalIngresados = 0;
     Console.WriteLine("Valores reiniciados");
 }
+void resumen()
+{
+    if (tipo == 1)
+    {
+        Console.WriteLine("El tipo de contenido fue: Película");
+    }
+    else if (tipo == 2)
+    {
+        Console.WriteLine("El tipo de contenido fue: Serie");
+    }
+    else if (tipo == 3)
+    {
+        Console.WriteLine("El tipo de contenido fue: Documental");
+    }
+    else if(tipo == 4)
+    {
+        Console.WriteLine("El tipo de contenido fue: Evento en vivo");
+    }
+    else
+    {
+        Console.WriteLine("No hubo contenido");
+    }
+
+    if (duracion == 0)
+    {
+        Console.WriteLine("No hubo duración");
+    }
+    else
+    {
+        Console.WriteLine($"La duracion fue de: {duracion}");
+    }
+
+    if(tipo == 1)
+    {
+        Console.WriteLine("El tipo de clasificación fue: Todo público");
+    }
+    else if(tipo == 2)
+    {
+        Console.WriteLine("El tipo de clasificación fue: +13");
+    }
+    else if(tipo == 3)
+    {
+        Console.WriteLine("El tipo de clasificación fue: +18");
+    }
+    else
+    {
+        Console.WriteLine("No hubo clasificación");
+    }
+
+    if(hora == -1)
+    {
+        Console.WriteLine("No hubo horario");
+    }
+    else
+    {
+        Console.WriteLine($"El horario fue a las {hora} horas");
+    }
+    
+    if(nivelProduc == 0)
+    {
+        Console.WriteLine("No hubo nivel de producción");
+    }
+    else
+    {
+        Console.WriteLine($"El nivel de producción fue de: {nivelProduc}");
+    }
+
+    if(impacto == "")
+    {
+        Console.WriteLine("No hubo impacto");
+    }
+    else
+    {
+        Console.WriteLine($"El impacto fue de: {impacto}");
+    }
+}
 void evaluarContenido()
 {
     tipoContenido();
