@@ -5,6 +5,10 @@ int clasificación = 0;
 int hora = -1;
 int nivelProduc = 0;
 int errores = 0;
+string impacto;
+int cantImpAlto = 0;
+int cantImpMedio = 0;
+int cantImpBajo = 0;
 do
 {
     menu();
@@ -185,6 +189,27 @@ void evaluarContenido()
         default:
             Console.WriteLine("Tipo no existente");
         break;
+    }
+}
+void evaluarImpacto()
+{
+    if(nivelProduc == 1 || duracion > 120 || (hora > 20 &&  hora < 23))
+    {
+        impacto = "Alto";
+        Console.WriteLine($"Nivel de impacto: {impacto}");
+        cantImpAlto++;
+    }
+    else if(nivelProduc == 2 || (duracion > 60 && duracion < 120))
+    {
+        impacto = "Medio";
+        Console.WriteLine($"Nivel de impacto: {impacto}");
+        cantImpMedio++;
+    }
+    else if(nivelProduc == 3 || duracion < 60)
+    {
+        impacto = "Bajo";
+        Console.WriteLine($"Nivel de impacto: {impacto}");
+        cantImpBajo++;
     }
 }
 int tipoContenido()
