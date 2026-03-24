@@ -18,8 +18,9 @@ do
     switch (opcion)
     {
         case 1:
+            errores = 0;
             evaluarContenido();
-            if(errores > 2)
+            if(errores > 1)
             {
                 Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
             }
@@ -32,7 +33,8 @@ do
         break;
 
         case 2:
-
+            reglas();
+            limpiar();
         break;
 
         case 3:
@@ -44,7 +46,7 @@ do
         break;
 
         case 5:
-            Console.WriteLine("Saliendo. a continuación resumen de los datos:");
+            Console.WriteLine("Saliendo. A continuación resumen de la ultima sesión:");
         break;
 
         default:
@@ -74,6 +76,27 @@ void menu()
         Console.WriteLine("Ingrese un numero correspondiente a las opciones");
     }
 }
+void reglas()
+{
+    Console.WriteLine("Sea bienvenido");
+    Console.WriteLine("Este es el listado de reglas:\n");
+    Console.WriteLine("Reglas de clasificación y horario.");
+    Console.WriteLine("Todo publico: cualquier hora");
+    Console.WriteLine("+13: entre 6 y 22 horas");
+    Console.WriteLine("+18: entre 5 y 22 horas\n");
+    Console.WriteLine("Reglas de duración por tipo.");
+    Console.WriteLine("Película: 60 a 180 minutos");
+    Console.WriteLine("Serie: 20 a 90 minutos");
+    Console.WriteLine("Documental: 30 a 120 minutos");
+    Console.WriteLine("Evento en vivo: 30 a 240 minutos\n");
+    Console.WriteLine("Reglas de producción.");
+    Console.WriteLine("Producción baja, válida solo para todo público o +13");
+    Console.WriteLine("Producción medio o alta, válida para cualquier clasificación\n");
+
+    Console.WriteLine("Recordatorios.");
+    Console.WriteLine("Ingrese los datos de forma correcta (fuera de rango o texto en lugar de numeros)");
+    Console.WriteLine("Trate que los datos del contenido coincidan con las reglas\n");
+}
 void evaluarContenido()
 {
     tipoContenido();
@@ -97,7 +120,7 @@ void evaluarContenido()
 
             if(duracion < 60 || duracion > 180)
             {
-                Console.WriteLine("La duración de la ingresada no corresponde a la categoria película");
+                Console.WriteLine("La duración ingresada no corresponde a la categoria: Película");
                 errores++;
             }
 
@@ -126,7 +149,7 @@ void evaluarContenido()
 
             if (duracion < 20 || duracion > 90)
             {
-                Console.WriteLine("La duración de la ingresada no corresponde a la categoria película");
+                Console.WriteLine("La duración ingresada no corresponde a la categoria: Serie");
                 errores++;
             }
 
@@ -155,7 +178,7 @@ void evaluarContenido()
 
             if (duracion < 30 || duracion > 120)
             {
-                Console.WriteLine("La duración de la ingresada no corresponde a la categoria película");
+                Console.WriteLine("La duración ingresada no corresponde a la categoria: Documental");
                 errores++;
             }
 
@@ -184,7 +207,7 @@ void evaluarContenido()
 
             if (duracion < 30 || duracion > 240)
             {
-                Console.WriteLine("La duración de la ingresada no corresponde a la categoria película");
+                Console.WriteLine("La duración ingresada no corresponde a la categoria: Evento en vivo");
                 errores++;
             }
 
@@ -233,12 +256,12 @@ void decisionFinal()
         Console.WriteLine("El contenido se puede publicar sin problema :)");
         cantPublicado++;
     }
-    else if((errores < 1 && errores > 0) && (impacto == "Medio" || impacto == "Bajo"))
+    else if((errores <= 1 && errores > 0) && (impacto == "Medio" || impacto == "Bajo"))
     {
         Console.WriteLine("El contenido se puede publicar pero debe ser ajustado corrigiendo los errores mencionados");
         cantPublicado++;
     }
-    else if((errores < 1 && errores > 0) || impacto == "Alto")
+    else if((errores <= 1 && errores > 0) || impacto == "Alto")
     {
         Console.WriteLine("El contenido debe ser enviado a revisar debido a su impacto");
         cantRevision++;
