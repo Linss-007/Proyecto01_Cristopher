@@ -44,7 +44,8 @@ do
         break;
 
         case 4:
-
+            reset();
+            limpiar();
         break;
 
         case 5:
@@ -132,6 +133,24 @@ void estadisticas()
         double porcentajeAprobados = (cantPublicado * 100) / totalIngresados;
         Console.WriteLine($"El porcentaje de aprovación es de: {porcentajeAprobados}");
     }
+}
+void reset()
+{
+    tipo = 0;
+    duracion = 0;
+    clasificación = 0;
+    hora = -1;
+    nivelProduc = 0;
+    errores = 0;
+    impacto = "";
+    cantImpAlto = 0;
+    cantImpMedio = 0;
+    cantImpBajo = 0;
+    cantPublicado = 0;
+    cantRechazado = 0;
+    cantRevision = 0;
+    totalIngresados = 0;
+    Console.WriteLine("Valores reiniciados");
 }
 void evaluarContenido()
 {
