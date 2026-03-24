@@ -12,6 +12,7 @@ int cantImpBajo = 0;
 int cantPublicado = 0;
 int cantRechazado = 0;
 int cantRevision = 0;
+int totalIngresados = 0;
 do
 {
     menu();
@@ -38,7 +39,8 @@ do
         break;
 
         case 3:
-
+            estadisticas();
+            limpiar();
         break;
 
         case 4:
@@ -96,6 +98,40 @@ void reglas()
     Console.WriteLine("Recordatorios.");
     Console.WriteLine("Ingrese los datos de forma correcta (fuera de rango o texto en lugar de numeros)");
     Console.WriteLine("Trate que los datos del contenido coincidan con las reglas\n");
+}
+void estadisticas()
+{
+    Console.WriteLine("Estas son las estadisticas actuales de los contenidos ingresados:\n");
+    Console.WriteLine($"Cantidad de publicados: {cantPublicado}");
+    Console.WriteLine($"Cantidad de rechazos: {cantRechazado}");
+    Console.WriteLine($"Cantidad en revisión: {cantRevision}");
+    if(cantImpAlto > cantImpMedio && cantImpAlto > cantImpBajo)
+    {
+        Console.WriteLine("Impacto predominante: Alto");
+    }
+    else if(cantImpMedio > cantImpAlto && cantImpMedio > cantImpBajo)
+    {
+        Console.WriteLine("Impacto predominante: Medio");
+    }
+    else if(cantImpBajo > cantImpMedio && cantImpBajo > cantImpAlto)
+    {
+        Console.WriteLine("Impacto predominante: Bajo");
+    }
+    else
+    {
+        Console.WriteLine("No hay un impacto predominante");
+    }
+
+    if(totalIngresados == 0)
+    {
+        double porcentajeAprobados = 0;
+        Console.WriteLine($"El porcentaje de aprovación es de: {porcentajeAprobados}");
+    }
+    else
+    {
+        double porcentajeAprobados = (cantPublicado * 100) / totalIngresados;
+        Console.WriteLine($"El porcentaje de aprovación es de: {porcentajeAprobados}");
+    }
 }
 void evaluarContenido()
 {
@@ -249,21 +285,25 @@ void decisionFinal()
     if (errores > 1)
     {
         Console.WriteLine("El contenido a sido rechazado debido a el incumplimiento de muchas normas");
+        totalIngresados++;
         cantRechazado++;
     }
     else if (errores == 0 && (impacto == "Medio" || impacto == "Bajo"))
     {
         Console.WriteLine("El contenido se puede publicar sin problema :)");
+        totalIngresados++;
         cantPublicado++;
     }
     else if((errores <= 1 && errores > 0) && (impacto == "Medio" || impacto == "Bajo"))
     {
         Console.WriteLine("El contenido se puede publicar pero debe ser ajustado corrigiendo los errores mencionados");
+        totalIngresados++;
         cantPublicado++;
     }
     else if((errores <= 1 && errores > 0) || impacto == "Alto")
     {
         Console.WriteLine("El contenido debe ser enviado a revisar debido a su impacto");
+        totalIngresados++;
         cantRevision++;
     }
 }
