@@ -50,6 +50,7 @@ do
 
         case 5:
             Console.WriteLine("Saliendo. A continuación resumen de la ultima sesión:");
+            resumen();
         break;
 
         default:
@@ -184,15 +185,15 @@ void resumen()
         Console.WriteLine($"La duracion fue de: {duracion}");
     }
 
-    if(tipo == 1)
+    if(clasificación == 1)
     {
         Console.WriteLine("El tipo de clasificación fue: Todo público");
     }
-    else if(tipo == 2)
+    else if(clasificación == 2)
     {
         Console.WriteLine("El tipo de clasificación fue: +13");
     }
-    else if(tipo == 3)
+    else if(clasificación == 3)
     {
         Console.WriteLine("El tipo de clasificación fue: +18");
     }
@@ -351,6 +352,7 @@ void evaluarContenido()
 
         default:
             Console.WriteLine("Tipo no existente");
+            errores = 2;
         break;
     }
 }
