@@ -152,6 +152,11 @@ void estadisticas()
         double porcentajeAprobados = (cantPublicado * 100) / totalIngresados;
         Console.WriteLine($"El porcentaje de aprovación es de: {porcentajeAprobados}");
     }
+    for (int i = 1; i <= 10;i++)
+    {
+        Console.Write("*");
+    }
+    Console.WriteLine();
 }
 void reset()
 {
