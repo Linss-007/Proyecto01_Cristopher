@@ -71,6 +71,7 @@ do
 
         default:
             Console.WriteLine("Opción no válida");
+            limpiar();
         break;
     }
 }while (opcion != 5);
