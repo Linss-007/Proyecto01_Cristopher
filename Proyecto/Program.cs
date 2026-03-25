@@ -21,7 +21,23 @@ do
         case 1:
             errores = 0;
             evaluarContenido();
-            if(errores > 1)
+            if(tipo == 1 && (duracion < 60 || duracion > 180))
+            {
+                Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
+            }
+            else if(tipo == 2 && (duracion < 20 || duracion > 90))
+            {
+                Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
+            }
+            else if(tipo == 3 && (duracion < 30 || duracion > 120))
+            {
+                Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
+            }
+            else if(tipo == 4 && (duracion < 30 || duracion > 240))
+            {
+                Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
+            }
+            else if(errores > 3)
             {
                 Console.WriteLine("No se puede evaluar impacto, corrija los datos mencionados");
             }
@@ -104,6 +120,7 @@ void reglas()
 void estadisticas()
 {
     Console.WriteLine("Estas son las estadisticas actuales de los contenidos ingresados:\n");
+    Console.WriteLine($"Cantidad de contenido ingresado: {totalIngresados}");
     Console.WriteLine($"Cantidad de publicados: {cantPublicado}");
     Console.WriteLine($"Cantidad de rechazos: {cantRechazado}");
     Console.WriteLine($"Cantidad en revisión: {cantRevision}");
@@ -352,7 +369,7 @@ void evaluarContenido()
 
         default:
             Console.WriteLine("Tipo no existente");
-            errores = 2;
+            errores = 5;
         break;
     }
 }
@@ -379,9 +396,9 @@ void evaluarImpacto()
 }
 void decisionFinal()
 {
-    if (errores > 1)
+    if (errores >= 1 && impacto == "Alto")
     {
-        Console.WriteLine("El contenido a sido rechazado debido a el incumplimiento de muchas normas");
+        Console.WriteLine("El contenido a sido rechazado debido a errores y el impacto");
         totalIngresados++;
         cantRechazado++;
     }
@@ -452,7 +469,7 @@ int clasContenido()
         datoCorrecto = int.TryParse(Console.ReadLine(), out clasificación);
         if(!datoCorrecto)
         {
-            Console.WriteLine("Clasificación no valida, intente de nuevo");
+            Console.WriteLine("Clasificación no válida, intente de nuevo");
         }
         else if (clasificación != 1 && clasificación != 2 && clasificación != 3)
         {
@@ -486,7 +503,7 @@ int producContenido()
     Console.WriteLine("1. Alto");
     Console.WriteLine("2. Medio");
     Console.WriteLine("3. Bajo");
-    while(!datoCorrecto)
+    while(!datoCorrecto || (nivelProduc != 1 && nivelProduc != 2 && nivelProduc != 3))
     {
         datoCorrecto = int.TryParse(Console.ReadLine(), out nivelProduc);
         if (!datoCorrecto || (nivelProduc != 1 && nivelProduc != 2 && nivelProduc != 3))
